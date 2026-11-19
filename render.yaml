@@ -81,6 +81,12 @@ services:
         value: 11.9.0
       - key: VITE_API_BASE_URL
         value: https://promobet-admin-api.onrender.com
+  - type: web
+    name: promobet-public
+    runtime: static
+    branch: promobet/site-setup
+    buildCommand: echo "Publishing PROMOBET public site"
+    staticPublishPath: public-site
   - type: keyvalue
     name: promobet-redis
     region: ohio
