@@ -30,6 +30,13 @@ services:
           property: port
       - key: RABBITMQ_URL
         value: ""
+  - type: keyvalue
+    name: promobet-redis
+    region: ohio
+    plan: free
+    ipAllowList: []
+    maxmemoryPolicy: noeviction
+    persistenceMode: off
 databases:
   - name: promobet-db
     databaseName: promobet_db
