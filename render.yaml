@@ -71,7 +71,6 @@ services:
   - type: web
     name: promobet-admin
     runtime: static
-    region: ohio
     branch: promobet/site-setup
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm nx build admin-web
     staticPublishPath: dist/apps/admin-web
