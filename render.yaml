@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: promobet-games-api
+    runtime: node
+    region: ohio
+    plan: free
+    branch: promobet/site-setup
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm db:generate && pnpm nx build games-api
+    startCommand: pnpm exec prisma db push && node dist/apps/games-api/main.js
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: PNPM_VERSION
+        value: 11.9.0
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: promobet-db
+          property: connectionString
+      - key: REDIS_HOST
+        fromService:
+          type: keyvalue
+          name: promobet-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: keyvalue
+          name: promobet-redis
+          property: port
+      - key: RABBITMQ_URL
+        value: ""
+databases:
+  - name: promobet-db
+    databaseName: promobet_db
+    plan: free
+    region: ohio
